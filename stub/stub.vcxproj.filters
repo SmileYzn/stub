@@ -19,8 +19,8 @@
     <ClCompile Include="ReAPI.cpp">
       <Filter>ReAPI</Filter>
     </ClCompile>
-    <ClCompile Include="ReGameDLL.cpp">
-      <Filter>ReGameDLL</Filter>
+    <ClCompile Include="ReGameAPI.cpp">
+      <Filter>ReGameAPI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -42,8 +42,8 @@
     <ClInclude Include="ReAPI.h">
       <Filter>ReAPI</Filter>
     </ClInclude>
-    <ClInclude Include="ReGameDLL.h">
-      <Filter>ReGameDLL</Filter>
+    <ClInclude Include="ReGameAPI.h">
+      <Filter>ReGameAPI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -68,7 +68,7 @@
     <Filter Include="ReAPI">
       <UniqueIdentifier>{5523f01b-4b51-4aef-a6ff-87c1c84c84db}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ReGameDLL">
+    <Filter Include="ReGameAPI">
       <UniqueIdentifier>{0b55bc3f-c400-4be1-8564-91974a2b701f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

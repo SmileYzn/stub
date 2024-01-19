@@ -1,9 +1,13 @@
 #include "precompiled.h"
 #include "interface.cpp"
 
-CReAPI gReAPI;
+IRehldsApi* g_ReAPI_Api;
+const RehldsFuncs_t* g_ReAPI_Funcs;
+IRehldsServerData* g_ReAPI_ServerData;
+IRehldsHookchains* g_ReAPI_Hookchains;
+IRehldsServerStatic* g_ReAPI_ServerStatic;
 
-bool CReAPI::Init()
+void ReAPI_Init()
 {
 	if (g_engfuncs.pfnIsDedicatedServer())
 	{
@@ -31,23 +35,28 @@ bool CReAPI::Init()
 			{
 				int retCode = 0;
 
-				this->m_API = (IRehldsApi*)ifaceFactory(VREHLDS_HLDS_API_VERSION, &retCode);
+				g_ReAPI_Api = (IRehldsApi*)ifaceFactory(VREHLDS_HLDS_API_VERSION, &retCode);
 
-				if (this->m_API)
+				if (g_ReAPI_Api)
 				{
-					if (this->m_API->GetMajorVersion() == REHLDS_API_VERSION_MAJOR)
+					if (g_ReAPI_Api->GetMajorVersion() == REHLDS_API_VERSION_MAJOR)
 					{
-						if (this->m_API->GetMinorVersion() >= REHLDS_API_VERSION_MINOR)
+						if (g_ReAPI_Api->GetMinorVersion() >= REHLDS_API_VERSION_MINOR)
 						{
-							this->m_Funcs = this->m_API->GetFuncs();
+							g_ReAPI_Funcs = g_ReAPI_Api->GetFuncs();
 							
-							this->m_Data = this->m_API->GetServerData();
+							g_ReAPI_ServerData = g_ReAPI_Api->GetServerData();
 							
-							this->m_Hookchains = this->m_API->GetHookchains();
+							g_ReAPI_Hookchains = g_ReAPI_Api->GetHookchains();
 							
-							this->m_Server_Static = this->m_API->GetServerStatic();
+							g_ReAPI_ServerStatic = g_ReAPI_Api->GetServerStatic();
 
-							return true;
+							if (g_ReAPI_Hookchains)
+							{
+								// Register hooks here
+							}
+
+							return;
 						}
 					}
 				}
@@ -57,12 +66,13 @@ bool CReAPI::Init()
 
 	gpMetaUtilFuncs->pfnLogConsole(&Plugin_info, "[%s] ReHLDS API failed to load.", Plugin_info.logtag);
 	gpMetaUtilFuncs->pfnLogConsole(&Plugin_info, "[%s] ReHLDS API version required: %d.%d", Plugin_info.logtag, REHLDS_API_VERSION_MAJOR, REHLDS_API_VERSION_MINOR);
-	
-	return false;
 }
 
-bool CReAPI::Stop()
+void ReAPI_Stop()
 {
-	return false;
+	if (g_ReAPI_Hookchains)
+	{
+		// Unregister hooks here
+	}
 }
 

@@ -45,18 +45,18 @@ C_DLLEXPORT int Meta_Attach(PLUG_LOADTIME now, META_FUNCTIONS* pFunctionTable, m
 
 	gpGamedllFuncs = pGamedllFuncs;
 
-	gReAPI.Init();
+	ReAPI_Init();
 
-	gReGameDLL.Init();
+	ReGameAPI_Init();
 
 	return 1;
 }
 
 C_DLLEXPORT int Meta_Detach(PLUG_LOADTIME now, PL_UNLOAD_REASON	reason)
 {
-	gReAPI.Stop();
+	ReAPI_Stop();
 
-	gReGameDLL.Stop();
+	ReGameAPI_Stop();
 
 	return 1;
 }

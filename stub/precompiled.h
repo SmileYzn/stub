@@ -22,6 +22,8 @@
 // Standard library
 #include <string>
 #include <vector>
+#include <map>
+#include <array>
 
 // System Includes
 #ifndef _WIN32
@@ -32,7 +34,7 @@
 #include <direct.h>
 #endif
 
-// CSSDK (ReHLDS MOD SDK)
+// CSSDK (ReHLDS SDK)
 #include <extdll.h>
 #include <eiface.h>
 
@@ -52,9 +54,9 @@
 #include "MetaDLL.h"
 #include "MetaEngine.h"
 
-// ReAPI & ReGameDLL
+// ReAPI & ReGameAPI
 #include "ReAPI.h"
-#include "ReGameDLL.h"
+#include "ReGameAPI.h"
 
-// STUB
+// Stub
 #include "stub.h"

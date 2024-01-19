@@ -90,7 +90,7 @@
     <ClInclude Include="MetaEngine.h" />
     <ClInclude Include="MetaMod.h" />
     <ClInclude Include="precompiled.h" />
-    <ClInclude Include="ReGameDLL.h" />
+    <ClInclude Include="ReGameAPI.h" />
     <ClInclude Include="stub.h" />
     <ClInclude Include="ReAPI.h" />
   </ItemGroup>
@@ -98,7 +98,7 @@
     <ClCompile Include="MetaDLL.cpp" />
     <ClCompile Include="MetaEngine.cpp" />
     <ClCompile Include="MetaMod.cpp" />
-    <ClCompile Include="ReGameDLL.cpp" />
+    <ClCompile Include="ReGameAPI.cpp" />
     <ClCompile Include="stub.cpp" />
     <ClCompile Include="precompiled.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
