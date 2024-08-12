@@ -18,7 +18,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.1.3
@@ -46,10 +46,10 @@ jobs:
     - name: Download Metamod-r
       run: |
         # Set assets data
-        $assets = "https://github.com/theAsmodai/metamod-r/releases/download/1.3.0.138/metamod-bin-1.3.0.138.zip"
+        $assets = "https://github.com/theAsmodai/metamod-r/releases/download/1.3.0.149/metamod-bin-1.3.0.149.zip"
 
         # Get ZIP file name
-        $zipName = "metamod-bin-1.3.0.138.zip"
+        $zipName = "metamod-bin-1.3.0.149.zip"
 
         # Download ZIP file
         Invoke-WebRequest -Uri $assets -Out $zipName
@@ -98,7 +98,7 @@ jobs:
     - name: Download Accuracy Fix
       run: |
         # Set assets data
-        $assets = "https://github.com/SmileYzn/AccuracyFix/releases/download/1.0.8/accuracyfix-windows.zip"
+        $assets = "https://github.com/SmileYzn/AccuracyFix/releases/download/1.1.2/accuracyfix-windows.zip"
 
         # Get ZIP file name
         $zipName = "accuracyfix-windows.zip"
