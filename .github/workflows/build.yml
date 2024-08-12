@@ -236,4 +236,10 @@ jobs:
   
       - name: Packaging binaries
         run: 7z a -tzip stub-bin.zip addons/
+
+      - name: Deploy artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: stub-mm
+          path: publish/*
           
