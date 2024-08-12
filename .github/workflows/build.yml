@@ -28,7 +28,7 @@ jobs:
         mkdir temp
         cd temp
 
-        # AMD 64
+        # amd64
         wget http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-4.8/g++-4.8_4.8.5-4ubuntu8_amd64.deb
         wget http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-4.8/libstdc++-4.8-dev_4.8.5-4ubuntu8_amd64.deb
         wget http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-4.8/gcc-4.8-base_4.8.5-4ubuntu8_amd64.deb
@@ -102,6 +102,10 @@ jobs:
   windows:
       name: Windows Build
       runs-on: windows-latest
+      
+      env:
+        SOLUTION_FILE_PATH: .
+        BUILD_CONFIGURATION: Release
   
       steps:
       - uses: actions/checkout@v4
