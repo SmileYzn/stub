@@ -1,4 +1,4 @@
-## Template repository for Metamod-r plugin, ReHLDS and ReGameDLL_CS
+## Template repository for Metamod-R Plugin
 
 <p align="center">Create your plugin for Metamod-R and ReGameDLL_CS from this template repository.</p>
 
