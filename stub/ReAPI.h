@@ -1,10 +1,10 @@
 #pragma once
 
-extern IRehldsApi* g_ReAPI_Api;
-extern const RehldsFuncs_t* g_ReAPI_Funcs;
-extern IRehldsServerData* g_ReAPI_ServerData;
-extern IRehldsHookchains* g_ReAPI_Hookchains;
-extern IRehldsServerStatic* g_ReAPI_ServerStatic;
+extern IRehldsApi *g_RehldsApi;
+extern const RehldsFuncs_t *g_RehldsFuncs;
+extern IRehldsServerData *g_RehldsData;
+extern IRehldsHookchains *g_RehldsHookchains;
+extern IRehldsServerStatic *g_RehldsSvs;
 
-extern void ReAPI_Init();
-extern void ReAPI_Stop();
+extern bool ReAPI_Init();
+extern bool ReAPI_Stop();

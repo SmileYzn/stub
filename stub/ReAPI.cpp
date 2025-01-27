@@ -1,30 +1,20 @@
 #include "precompiled.h"
 #include "interface.cpp"
 
-IRehldsApi* g_ReAPI_Api;
-const RehldsFuncs_t* g_ReAPI_Funcs;
-IRehldsServerData* g_ReAPI_ServerData;
-IRehldsHookchains* g_ReAPI_Hookchains;
-IRehldsServerStatic* g_ReAPI_ServerStatic;
+IRehldsApi *g_RehldsApi;
+const RehldsFuncs_t *g_RehldsFuncs;
+IRehldsServerData *g_RehldsData;
+IRehldsHookchains *g_RehldsHookchains;
+IRehldsServerStatic *g_RehldsSvs;
 
-void ReAPI_Init()
+bool ReAPI_Init()
 {
 	if (g_engfuncs.pfnIsDedicatedServer())
 	{
-		CSysModule* engineModule = nullptr;
-
 #ifdef WIN32
-		const std::vector<std::string> dllNames = { "swds.dll", "hw.dll", "sw.dll" };
-
-		for (auto const & dll : dllNames)
-		{
-			if (engineModule = Sys_GetModuleHandle(dll.c_str()))
-			{
-				break;
-			}
-		}
+		auto engineModule = Sys_GetModuleHandle("swds.dll");
 #else
-		engineModule = Sys_LoadModule("engine_i486.so");
+		auto engineModule = Sys_GetModuleHandle("engine_i486.so");
 #endif
 
 		if (engineModule)
@@ -35,28 +25,30 @@ void ReAPI_Init()
 			{
 				int retCode = 0;
 
-				g_ReAPI_Api = (IRehldsApi*)ifaceFactory(VREHLDS_HLDS_API_VERSION, &retCode);
+				g_RehldsApi = (IRehldsApi *)ifaceFactory(VREHLDS_HLDS_API_VERSION, &retCode);
 
-				if (g_ReAPI_Api)
+				if (g_RehldsApi)
 				{
-					if (g_ReAPI_Api->GetMajorVersion() == REHLDS_API_VERSION_MAJOR)
+					if (g_RehldsApi->GetMajorVersion() == REHLDS_API_VERSION_MAJOR)
 					{
-						if (g_ReAPI_Api->GetMinorVersion() >= REHLDS_API_VERSION_MINOR)
+						if (g_RehldsApi->GetMinorVersion() >= REHLDS_API_VERSION_MINOR)
 						{
-							g_ReAPI_Funcs = g_ReAPI_Api->GetFuncs();
-							
-							g_ReAPI_ServerData = g_ReAPI_Api->GetServerData();
-							
-							g_ReAPI_Hookchains = g_ReAPI_Api->GetHookchains();
-							
-							g_ReAPI_ServerStatic = g_ReAPI_Api->GetServerStatic();
+							g_RehldsFuncs = g_RehldsApi->GetFuncs();
 
-							if (g_ReAPI_Hookchains)
+							g_RehldsData = g_RehldsApi->GetServerData();
+
+							g_RehldsHookchains = g_RehldsApi->GetHookchains();
+
+							g_RehldsSvs = g_RehldsApi->GetServerStatic();
+
+							if (g_RehldsHookchains)
 							{
-								// Register hooks here
+								// Register hooks
 							}
 
-							return;
+							gpMetaUtilFuncs->pfnLogConsole(PLID, "[%s] ReHLDS API Loaded: %d.%d", Plugin_info.logtag, REHLDS_API_VERSION_MAJOR, REHLDS_API_VERSION_MINOR);
+
+							return true;
 						}
 					}
 				}
@@ -64,15 +56,17 @@ void ReAPI_Init()
 		}
 	}
 
-	gpMetaUtilFuncs->pfnLogConsole(&Plugin_info, "[%s] ReHLDS API failed to load.", Plugin_info.logtag);
-	gpMetaUtilFuncs->pfnLogConsole(&Plugin_info, "[%s] ReHLDS API version required: %d.%d", Plugin_info.logtag, REHLDS_API_VERSION_MAJOR, REHLDS_API_VERSION_MINOR);
+	gpMetaUtilFuncs->pfnLogConsole(PLID, "[%s] ReHLDS API failed to load.", Plugin_info.logtag);
+
+	return false;
 }
 
-void ReAPI_Stop()
+bool ReAPI_Stop()
 {
-	if (g_ReAPI_Hookchains)
+	if (g_RehldsHookchains)
 	{
-		// Unregister hooks here
+		// Unregister hooks
 	}
-}
 
+	return true;
+}
