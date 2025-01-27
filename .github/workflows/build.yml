@@ -62,7 +62,7 @@ jobs:
           mkdir -p ../cstrike/addons/stub/dlls
 
           # Copy release file
-          cp ./Release/stub.so ../cstrike/addons/stub/dlls
+          cp ./Release/stub_mm.so ../cstrike/addons/stub/dlls
 
       run: docker exec build-container bash -c "$SCRIPT"
 
