@@ -86,25 +86,25 @@ jobs:
       working-directory: ${{github.workspace}}
       run: |
         # Open directory
-        cd Stub
+        cd stub
 
         # Make Release directory
-        mkdir Release
+        mkdir -p Release
 
         # Execute Build
         msbuild Stub.vcxproj -property:configuration=Release -nologo -verbosity:minimal
 
         # Make publish directory
-        mkdir publish\addons\stub\dlls
+        mkdir -p ..\cstrike\addons\stub\dlls
 
         # Copy cstrike files to publish
         copy ..\cstrike\* publish -Recurse -Force
 
         # Move released dll to publish
-        copy Release\*.dll publish\addons\stub\dlls -Recurse -Force
+        copy Release\*.dll ..\cstrike\addons\stub\dlls -Recurse -Force
 
     - name: Deploy artifacts
       uses: actions/upload-artifact@v4
       with:
         name: win32
-        path: publish/*
+        path: ${{github.workspace}}/cstrike
