@@ -101,7 +101,7 @@ jobs:
         copy ..\cstrike\* publish -Recurse -Force
 
         # Move released dll to publish
-        copy Release\*.dll publish\addons\pugmod\dlls -Recurse -Force
+        copy Release\*.dll publish\addons\stub\dlls -Recurse -Force
 
     - name: Deploy artifacts
       uses: actions/upload-artifact@v4
