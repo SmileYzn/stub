@@ -92,7 +92,7 @@ jobs:
         mkdir -p Release
 
         # Execute Build
-        msbuild Stub.vcxproj -property:configuration=Release -nologo -verbosity:minimal
+        msbuild Stub.vcxproj -property:configuration=Release -nologo -verbosity:quiet -m
 
         # Make publish directory
         mkdir -p ..\cstrike\addons\stub\dlls
